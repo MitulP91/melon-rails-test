@@ -17,14 +17,17 @@ game.PlayerEntity = me.ObjectEntity.extend({
 		// Give Player HP
 		this.hp = 3;
 
+		// Date of Last HP Loss
+		this.last_hp_loss = me.timer.getTime();
+
+		// Date of Last Bullet Shot
+		this.last_bullet_shot = me.timer.getTime();
+
 		// Store walking direction
 		this.walk_direction = false;
 
 		// Set Type
-		this.type = me.game.PLAYER_OBJECT;
-
-		// Date
-		this.last_hp_loss = new Date();
+		this.type = 'PLAYER';
 	},
 
 	update: function() {
@@ -59,9 +62,12 @@ game.PlayerEntity = me.ObjectEntity.extend({
         }
 
         if(me.input.isKeyPressed('shoot')) {
-        	var shot = new ShotEntity(this.pos.x, this.pos.y, this.walk_direction);
-        	me.game.add(shot, this.z); 
-			me.game.sort();  
+        	if(me.timer.getTime() - this.last_bullet_shot > 500) {
+	        	var shot = new ShotEntity(this.pos.x, this.pos.y, this.walk_direction);
+	        	this.last_bullet_shot = me.timer.getTime();
+	        	me.game.add(shot, this.z); 
+				me.game.sort(); 
+			} 
         }
 
         // Check and Update Player Movement
@@ -87,10 +93,10 @@ game.PlayerEntity = me.ObjectEntity.extend({
 
 				  if(this.hp === 3) {
 				  	this.hp--;
-				  	this.last_hp_loss = new Date();
-				  } else if(new Date() - this.last_hp_loss > 3000) {
+				  	this.last_hp_loss = me.timer.getTime();
+				  } else if(me.timer.getTime() - this.last_hp_loss > 3000) {
 					this.hp--;
-					this.last_hp_loss = new Date();
+					this.last_hp_loss = me.timer.getTime();
 				  }
 
 				  if(this.hp === 0) {
@@ -116,24 +122,24 @@ game.CoinEntity = me.CollectableEntity.extend({
 		this.parent(x,y,settings);
 
 		// Set Type
-		this.type = me.game.COIN_OBJECT;
+		this.type = me.game.COLLECTABLE_OBJECT;
 	},
 
 	// Checks for Collision With Coins
 	onCollision: function(res, obj) {
-		// Play Sound
-		// me.audio.play("cling");
+		if(obj.type == 'PLAYER') {
+			// Play Sound
+			// me.audio.play("cling");
 
-		console.log(obj);
-		console.log(res);
-		// Increment HUD Score
-		game.data.score += 250;
+			// Increment HUD Score
+			game.data.score += 250;
 
-		// Can't Be Collected Twice
-		this.collidable = false;
+			// Can't Be Collected Twice
+			this.collidable = false;
 
-		// Remove It
-		me.game.remove(this);
+			// Remove It
+			me.game.remove(this);
+		}
 	}
 });
 
@@ -303,7 +309,7 @@ var ShotEntity = me.ObjectEntity.extend({
 	
 		this.gravity = 0;	
 
-		this.type = me.game.SHOT_OBJECT;
+		this.type = 'SHOT';
 	},
 
 	update: function() {
@@ -328,6 +334,11 @@ var ShotEntity = me.ObjectEntity.extend({
         // Check and Update Movement
         this.updateMovement();
 
+        if(this.vel.x == 0) {
+        	me.game.remove(this);
+        	return false;
+        }
+
         var res = me.game.collide(this);
 
         if(res) {
@@ -336,15 +347,11 @@ var ShotEntity = me.ObjectEntity.extend({
         		this.collidable = false;
         		me.game.remove(this);
         		return false;
-        	} else if(res.obj.type != me.game.PLAYER_OBJECT && res.obj.type != me.game.COIN_OBJECT && res.obj.type != me.game.SHOT_OBJECT) {
+        	} else if(res.obj.type != 'PLAYER' && res.obj.type != me.game.COLLECTABLE_OBJECT && res.obj.type != 'SHOT') {
         		this.collidable = false;
         		me.game.remove(this);
         		return false;
-        	} else if(this.vel.x == 0) {
-        		this.collidable = false;
-        		me.game.remove(this);
-        		return false;
-        	} 
+        	}  
         }
         return this.parent();
 	},
