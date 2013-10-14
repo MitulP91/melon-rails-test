@@ -351,7 +351,7 @@ var ShotEntity = me.ObjectEntity.extend({
         		this.collidable = false;
         		me.game.remove(this);
         		return false;
-        	}  else if(res.obj.type == me.game.LevelEntity) {
+        	}  else if(res.obj.type == me.LevelEntity) {
         		me.game.remove(res.obj);
         		this.collidable = false;
         		me.game.remove(this);

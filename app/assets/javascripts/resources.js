@@ -36,13 +36,13 @@ game.resources = [
 	 * {name: "example01", type: "tmx", src: "data/map/example01.json"},
  	 */
  	{name: "area01", type: "tmx", src: "/assets/map/area01.tmx"},
- 	{name: "area02", type: "tmx", src: "/assets/map/area02.tmx"}
+ 	{name: "area02", type: "tmx", src: "/assets/map/area02.tmx"},
 
 	/* Background music. 
 	 * @example
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/", channel : 1},
 	 */	
-	// {name: "dst-inertexponent", type: "audio", src: "/assets/audios/dst-inertexponent.mp3", channel : 1},
+	{name: "dst-inertexponent", type: "audio", src: "http://www.jewelbeat.com/free/free-sound-effects/musical%20effects/Taiko_Drum_1.mp3", channel : 1},
 
 	/* Sound effects. 
 	 * @example

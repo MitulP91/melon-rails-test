@@ -6982,6 +6982,9 @@ window.me = window.me || {};
 		 */
 		onResetEvent : function() {
 			// to be extended
+			// *JOE* adding bgm
+			me.audio.playTrack("DST-InertExponent");
+
 		},
 
 		/**
@@ -6993,6 +6996,8 @@ window.me = window.me || {};
 		 */
 		onDestroyEvent : function() {
 			// to be extended
+			//  *JOE* stop the current audio track
+			me.audio.stopTrack();
 		}
 
 	});
