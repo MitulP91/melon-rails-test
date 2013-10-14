@@ -351,7 +351,16 @@ var ShotEntity = me.ObjectEntity.extend({
         		this.collidable = false;
         		me.game.remove(this);
         		return false;
-        	}  else if(res.obj.type == me.LevelEntity) {
+        	}  else if(res.obj.type == me.game.currentLevel.objectGroups[1].objects[9]) {
+        		console.log("Biotch")
+
+        		// me.game.currentLevel is me.TMXTileMap
+        			// a reference to the game current level
+        		// else if(res.obj.type == me.game.currentLevel.objectGroups[1].objects[9])
+
+        		// me.game.world is a reference to the game world 
+					// a world is a virtual environment containing all the game objects
+        		// me.game.world.children[1]
         		me.game.remove(res.obj);
         		this.collidable = false;
         		me.game.remove(this);

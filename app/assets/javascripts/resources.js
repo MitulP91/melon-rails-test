@@ -42,7 +42,7 @@ game.resources = [
 	 * @example
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/", channel : 1},
 	 */	
-	{name: "dst-inertexponent", type: "audio", src: "http://www.jewelbeat.com/free/free-sound-effects/musical%20effects/Taiko_Drum_1.mp3", channel : 1},
+	// {name: "dst-inertexponent", type: "audio", src: "/assets/audios/dst-inertexponent.mp3", channel : 1},
 
 	/* Sound effects. 
 	 * @example
