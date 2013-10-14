@@ -325,8 +325,6 @@ var ShotEntity = me.ObjectEntity.extend({
 		} else if(!this.walkingLeft) {
 			this.vel.x += this.accel.x * me.timer.tick;
 			this.flipX(true);
-		} else if(this.x == 0 || this.x == me.video.getWidth() - this.spritewidth) {
-			this.vel.x = 0;
 		} else {
 			this.vel.x = 0;
 		}

@@ -42,13 +42,13 @@ game.resources = [
 	 * @example
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/", channel : 1},
 	 */	
-	// {name: "dst-inertexponent", type: "audio", src: "/assets/audios/dst-inertexponent.mp3", channel : 1},
+	// {name: "dst-inertexponent", type: "audio", src: "/public/audios/dst-inertexponent.mp3", channel : 1},
 
 	/* Sound effects. 
 	 * @example
 	 * {name: "example_sfx", type: "audio", src: "data/sfx/", channel : 2}
 	 */
-	// {name: "cling", type: "audio", src: "/assets/audios/cling.mp3", channel : 2},
- //    {name: "stomp", type: "audio", src: "/assets/audios/stomp.mp3", channel : 1},
- //    {name: "jump",  type: "audio", src: "/assets/audios/jump.mp3", channel : 1}
+	// {name: "cling", type: "audio", src: "/public/audios/cling.mp3", channel : 2},
+ //    {name: "stomp", type: "audio", src: "/public/audios/stomp.mp3", channel : 1},
+ //    {name: "jump",  type: "audio", src: "/public/audios/jump.mp3", channel : 1}
 ];
